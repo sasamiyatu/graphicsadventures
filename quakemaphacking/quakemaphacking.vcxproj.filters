@@ -16,24 +16,10 @@
     <Filter Include="external">
       <UniqueIdentifier>{b0d0317b-e907-4aef-a1b0-2293afc8570f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="external\glad">
-      <UniqueIdentifier>{bde7fe33-18a4-4ecd-b928-2cdb9866bcb5}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="glad\src\glad.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="glad\include\glad\glad.h">
-      <Filter>external\glad</Filter>
-    </ClInclude>
-    <ClInclude Include="glad\include\KHR\khrplatform.h">
-      <Filter>external\glad</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>
