@@ -233,6 +233,9 @@ void allocate_command_buffers(VkDevice device, VkCommandPool pool, u32 count, Vk
 
 int main(int argc, char** argv)
 {
+    u64 pfreq = SDL_GetPerformanceFrequency();
+    double inv_pfreq = 1.0 / (double)pfreq;
+
     VK_CHECK(volkInitialize());
 
     VkInstance instance = create_instance();
@@ -263,6 +266,10 @@ int main(int argc, char** argv)
 
     SDL_Event event;
     bool quit = false;
+
+    u64 prev_time = SDL_GetPerformanceCounter();
+    double elapsed = 0.0;
+
     while (!quit) {
         while (SDL_PollEvent(&event)) {
             if (event.type == SDL_QUIT) {
@@ -276,6 +283,11 @@ int main(int argc, char** argv)
                 }
             }
         }
+
+        u64 curr_time = SDL_GetPerformanceCounter();
+        double delta = (double)(curr_time - prev_time) * inv_pfreq;
+        elapsed += delta;
+        prev_time = curr_time;
 
         VkAcquireNextImageInfoKHR info{ VK_STRUCTURE_TYPE_ACQUIRE_NEXT_IMAGE_INFO_KHR };
         info.deviceMask = 1;
@@ -310,7 +322,7 @@ int main(int argc, char** argv)
             vkCmdPipelineBarrier2(command_buffer, &dep_info);
         }
 
-        VkClearColorValue clear = { 1, 0, 1, 1 };
+        VkClearColorValue clear = { cosf(elapsed) * 0.5 + 0.5, sinf(elapsed * 0.77) * 0.5 + 0.5, cosf(elapsed * 0.3459) * 0.5 + 0.5, 1};
         VkImageSubresourceRange range = {};
         range.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
         range.baseArrayLayer = 0;
@@ -339,7 +351,6 @@ int main(int argc, char** argv)
         }
 
         vkEndCommandBuffer(command_buffer);
-
 
         VkSubmitInfo2 submit = { VK_STRUCTURE_TYPE_SUBMIT_INFO_2 };
         VkCommandBufferSubmitInfo submit_info{ VK_STRUCTURE_TYPE_COMMAND_BUFFER_SUBMIT_INFO };

@@ -24,6 +24,7 @@
     <ProjectGuid>{d5d379af-410b-4d9d-9712-4bf2ba608e51}</ProjectGuid>
     <RootNamespace>quakemaphacking</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>advancedgraphics</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
