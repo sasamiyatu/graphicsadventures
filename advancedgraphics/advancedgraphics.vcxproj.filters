@@ -32,5 +32,8 @@
     <CustomBuild Include="..\shaders\triangle.vert">
       <Filter>Shaders</Filter>
     </CustomBuild>
+    <CustomBuild Include="..\shaders\generate_mipmaps.comp">
+      <Filter>Shaders</Filter>
+    </CustomBuild>
   </ItemGroup>
 </Project>

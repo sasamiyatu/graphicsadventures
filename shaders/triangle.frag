@@ -10,7 +10,8 @@ layout(set = 0, binding = 1) uniform sampler2D base_color_sampler;
 void main()
 {
     vec4 sampled = texture(base_color_sampler, uv0);
-    if (sampled.a < 0.5) discard;
+    //vec4 sampled = textureLod(base_color_sampler, uv0, 0.0f);
     vec3 N = normalize(normal);
-    out_color = vec4(sampled.rgb, 1.0);
+    out_color = vec4(sampled.rgba);
+    //out_color = vec4(1.0, 0.0, 1.0, 1.0);
 }

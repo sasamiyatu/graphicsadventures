@@ -113,6 +113,18 @@
       <AdditionalLibraryDirectories>C:\Users\Sasami\Documents\Visual Studio 2019\Libraries\SDL2-2.0.20\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies)SDL2.lib;SDL2main.lib;</AdditionalDependencies>
     </Link>
+    <CustomBuild>
+      <Command>glslangvalidator %(FullPath) --target-env vulkan1.3 -o $(SolutionDir)shaders\spirv\%(Filename)%(Extension).spv</Command>
+    </CustomBuild>
+    <CustomBuild>
+      <Message>Compiling shaders</Message>
+    </CustomBuild>
+    <CustomBuild>
+      <Outputs>$(SolutionDir)shaders\spirv\%(Filename)%(Extension).spv</Outputs>
+    </CustomBuild>
+    <CustomBuild>
+      <AdditionalInputs>%(FullPath)</AdditionalInputs>
+    </CustomBuild>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -132,6 +144,12 @@
       <AdditionalLibraryDirectories>C:\Users\Sasami\Documents\Visual Studio 2019\Libraries\SDL2-2.0.20\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies)SDL2.lib;SDL2main.lib;</AdditionalDependencies>
     </Link>
+    <CustomBuild>
+      <Command>glslangvalidator %(FullPath) --target-env vulkan1.3 -o $(SolutionDir)shaders\spirv\%(Filename)%(Extension).spv</Command>
+      <Outputs>$(SolutionDir)shaders\spirv\%(Filename)%(Extension).spv</Outputs>
+      <Message>Compiling shaders</Message>
+      <AdditionalInputs>%(FullPath)</AdditionalInputs>
+    </CustomBuild>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
@@ -141,13 +159,18 @@
       <FileType>Document</FileType>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">glslangvalidator %(FullPath) --target-env vulkan1.3 -o $(SolutionDir)shaders\spirv\%(Filename)%(Extension).spv</Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(SolutionDir)shaders\spirv\%(Filename)%(Extension).spv</Outputs>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> %(FullPath)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(FullPath)</AdditionalInputs>
     </CustomBuild>
     <CustomBuild Include="..\shaders\triangle.vert">
       <FileType>Document</FileType>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">glslangvalidator %(FullPath) --target-env vulkan1.3 -o $(SolutionDir)shaders\spirv\%(Filename)%(Extension).spv</Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(SolutionDir)shaders\spirv\%(Filename)%(Extension).spv</Outputs>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"> %(FullPath)</AdditionalInputs>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="..\shaders\generate_mipmaps.comp">
+      <FileType>Document</FileType>
     </CustomBuild>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
