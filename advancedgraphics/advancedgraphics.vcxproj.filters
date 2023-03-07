@@ -35,5 +35,13 @@
     <CustomBuild Include="..\shaders\generate_mipmaps.comp">
       <Filter>Shaders</Filter>
     </CustomBuild>
+    <CustomBuild Include="..\shaders\shadowmap.frag">
+      <Filter>Shaders</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\shaders\shadowmap.vert">
+      <Filter>Shaders</Filter>
+    </None>
   </ItemGroup>
 </Project>
